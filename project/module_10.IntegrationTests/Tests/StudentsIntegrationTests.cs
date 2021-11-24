@@ -42,7 +42,7 @@ namespace module_10.IntegrationTests
 
         [TestCase(" ", "sergeymorozov@gmail.com", "89129478969")]
         [TestCase("Sergey Morozov", "sergeymorozov", "89129478969")]
-        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "912947896")]
+        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "9129478967893515877")]
         public async Task Create_NewStudentJson_RetunsStatusCode400(string fullName, string email, string phoneNumber)
         {
             // Arrange
