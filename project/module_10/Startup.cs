@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace module_10
 {
@@ -36,8 +37,19 @@ namespace module_10
                 .AddTransient<IValidator<HometaskDto>, HometaskValidator>()
                 .AddTransient<IValidator<AttendanceDto>, AttendanceValidator>();
 
-            services
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                services
                 .AddBusinessLogic(Configuration.GetConnectionString("UniversityDb"));
+            }
+            else
+            {
+                services
+                .AddBusinessLogic(GetConnectionStringFromEnvironment());
+            }
+
+            //services
+            //    .AddBusinessLogic(Configuration.GetConnectionString("UniversityDb"));
 
             services.AddSwaggerGen(options =>
             {
@@ -79,7 +91,16 @@ namespace module_10
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            }); 
+            });
+        }
+
+        private static string GetConnectionStringFromEnvironment()
+        {
+            string connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+            var databaseUri = new Uri(connectionUrl);
+            string db = databaseUri.LocalPath.TrimStart('/');
+            string[] userInfo = databaseUri.UserInfo.Split(':', StringSplitOptions.RemoveEmptyEntries);
+            return $"User ID={userInfo[0]};Password={userInfo[1]};Host={databaseUri.Host};Port={databaseUri.Port};Database={db};Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
         }
     }
 }
