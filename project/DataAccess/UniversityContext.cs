@@ -13,12 +13,12 @@ namespace DataAccess
         
         public UniversityContext(DbContextOptions<UniversityContext> options) : base(options)
         {            
-            if (!Database.IsRelational() || !_initialized)
-            {
-                Database.EnsureDeleted();
-                Database.EnsureCreated();
-                _initialized = true;
-            }
+            //if (!Database.IsRelational() || !_initialized)
+            //{
+            //    Database.EnsureDeleted();
+            //    Database.EnsureCreated();
+            //    _initialized = true;
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
