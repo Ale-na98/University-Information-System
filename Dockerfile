@@ -3,7 +3,7 @@ WORKDIR /app
 
 # Copy csproj and restore as distinct layers
 COPY project/*.csproj ./project
-RUN dotnet restore
+RUN dotnet restore project/M10.sln
 
 # Copy everything else and build
 COPY . .
