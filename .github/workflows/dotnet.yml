@@ -30,7 +30,7 @@ jobs:
       working-directory: project
       
     - name: Deploy to Heroku
-    - uses: AkhileshNS/heroku-deploy@v3.12.12
+      uses: AkhileshNS/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_email: ${{secrets.HEROKU_EMAIL}}
