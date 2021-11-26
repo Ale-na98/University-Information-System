@@ -4,7 +4,7 @@ namespace DataAccess
 {
     public class UniversityContext : DbContext
     {
-        private static volatile bool _initialized;
+        //private static volatile bool _initialized;
         public DbSet<StudentDb> Students { get; set; }
         public DbSet<TeacherDb> Teachers { get; set; }
         public DbSet<LectureDb> Lectures { get; set; }
@@ -12,13 +12,13 @@ namespace DataAccess
         public DbSet<AttendanceDb> Attendance { get; set; }
         
         public UniversityContext(DbContextOptions<UniversityContext> options) : base(options)
-        {            
-            //if (!Database.IsRelational() || !_initialized)
-            //{
-            //    Database.EnsureDeleted();
-            //    Database.EnsureCreated();
-            //    _initialized = true;
-            //}
+        {
+            if (!Database.IsRelational())
+            {
+                Database.EnsureDeleted();
+                Database.EnsureCreated();
+                //_initialized = true;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

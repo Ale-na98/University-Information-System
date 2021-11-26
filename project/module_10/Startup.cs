@@ -37,15 +37,15 @@ namespace module_10
                 .AddTransient<IValidator<HometaskDto>, HometaskValidator>()
                 .AddTransient<IValidator<AttendanceDto>, AttendanceValidator>();
 
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production" )
             {
                 services
-                .AddBusinessLogic(Configuration.GetConnectionString("UniversityDb"));
+                .AddBusinessLogic(GetConnectionStringFromEnvironment());
             }
             else
             {
                 services
-                .AddBusinessLogic(GetConnectionStringFromEnvironment());
+                .AddBusinessLogic(Configuration.GetConnectionString("UniversityDb"));
             }
 
             //services
