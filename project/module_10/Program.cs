@@ -31,6 +31,8 @@ namespace module_10
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    var port = Environment.GetEnvironmentVariable("PORT");
+                    webBuilder.UseUrls($"http://+:{port}");
                     webBuilder.UseStartup<Startup>();
                 })
                 .ConfigureLogging(logging =>

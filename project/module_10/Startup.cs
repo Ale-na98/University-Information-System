@@ -48,9 +48,6 @@ namespace module_10
                 .AddBusinessLogic(Configuration.GetConnectionString("UniversityDb"));
             }
 
-            //services
-            //    .AddBusinessLogic(Configuration.GetConnectionString("UniversityDb"));
-
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "RestApi", Version = "v1" });
