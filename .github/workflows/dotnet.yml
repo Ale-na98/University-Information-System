@@ -8,31 +8,33 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
       working-directory: project
+      
     - name: Build
       run: dotnet build --no-restore
       working-directory: project
+      
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: project
-    #- name: Deploy to Heroku
-    #- uses: AkhileshNS/heroku-deploy@v3.12.12
-    #  with:
-    #    heroku_api_key: 871001cb-33eb-4195-9f9b-c386dc8ac28d
-    #    heroku_email: ale-na98@yandex.ru
-    #    heroku_app_name: universityprojectdotnet
-    #    branch: master
-    #    dontautocreate: true
-    #    usedocker: true
-    #    run: git push heroku master
+      
+    - name: Deploy to Heroku
+    - uses: AkhileshNS/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        heroku_app_name: universityprojectdotnet
+        branch: master
+        dontautocreate: true
+        usedocker: true
