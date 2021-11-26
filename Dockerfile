@@ -18,4 +18,4 @@ COPY --from=build-env /app/out .
 # Run the app on container startup
 # Use your project name for the second parameter
 # e.g. MyProject.dll
-ENTRYPOINT [ "dotnet", "module_10.dll" ]
+ENTRYPOINT [ "dotnet", "module_10.dll", "--urls=http://0.0.0.0:$PORT/" ]
