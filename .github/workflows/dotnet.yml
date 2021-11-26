@@ -26,13 +26,13 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: project
-    - name: Deploy to Heroku
-    - uses: AkhileshNS/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: 871001cb-33eb-4195-9f9b-c386dc8ac28d
-        heroku_email: ale-na98@yandex.ru
-        heroku_app_name: universityprojectdotnet
-        branch: master
-        dontautocreate: true
-        usedocker: true
-        run: git push heroku master
+    #- name: Deploy to Heroku
+    #- uses: AkhileshNS/heroku-deploy@v3.12.12
+    #  with:
+    #    heroku_api_key: 871001cb-33eb-4195-9f9b-c386dc8ac28d
+    #    heroku_email: ale-na98@yandex.ru
+    #    heroku_app_name: universityprojectdotnet
+    #    branch: master
+    #    dontautocreate: true
+    #    usedocker: true
+    #    run: git push heroku master
