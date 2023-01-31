@@ -1,17 +1,17 @@
 ﻿using System;
-using DataAccess;
+using DataAccess.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace BusinessLogic
+namespace BusinessLogic.Providers
 {
-    public class SmsProvider : ISmsProvider
+    public class SmsProvider
     {
-        private readonly IHometasksRepository _hometasksRepository;
-        private readonly IStudentsRepository _studentsRepository;
-        private readonly ILecturesRepository _lecturesRepository;
+        private readonly ILectureRepository _lecturesRepository;
+        private readonly IHometaskRepository _hometasksRepository;
+        private readonly IStudentRepository _studentsRepository;
         private readonly ILogger<SmsProvider> _logger;
 
-        public SmsProvider(IHometasksRepository hometasksRepository, ILecturesRepository lecturesRepository, IStudentsRepository studentsRepository, ILogger<SmsProvider> logger)
+        public SmsProvider(IHometaskRepository hometasksRepository, ILectureRepository lecturesRepository, IStudentRepository studentsRepository, ILogger<SmsProvider> logger)
         {
             _hometasksRepository = hometasksRepository;
             _studentsRepository = studentsRepository;

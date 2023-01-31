@@ -1,0 +1,57 @@
+﻿@page
+@model Presentation.Pages.Admin.Students.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Are you sure you want to delete this student?</h3>
+<div>
+    <hr />
+    <div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.Id" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.Id)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.FullName" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.FullName)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.Email" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.Email)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.PhoneNumber" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.PhoneNumber)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.GroupName" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.GroupName)
+            </div>
+        </div>
+
+        <form method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a role="button" class="btn btn-secondary" asp-page="./Index" >Back to List</a>
+        </form>
+    </div>
+</div>

@@ -1,18 +1,19 @@
-﻿using DataAccess;
+﻿using DataAccess.Entities;
+using DataAccess.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace BusinessLogic
+namespace BusinessLogic.Providers
 {
-    public class EmailProvider : IEmailProvider
+    public class EmailProvider
     {
         private readonly IAttendanceRepository _attendanceRepository;
-        private readonly IStudentsRepository _studentsRepository;
-        private readonly ITeachersRepository _teachersRepository;
-        private readonly ILecturesRepository _lecturesRepository;
+        private readonly IStudentRepository _studentsRepository;
+        private readonly IUniversityRepository<TeacherDb> _teachersRepository;
+        private readonly ILectureRepository _lecturesRepository;
         private readonly ILogger<EmailProvider> _logger;
 
-        public EmailProvider(IAttendanceRepository attendanceRepository, ILecturesRepository lecturesRepository, 
-            ITeachersRepository teachersRepository, IStudentsRepository studentsRepository, ILogger<EmailProvider> logger)
+        public EmailProvider(IAttendanceRepository attendanceRepository, ILectureRepository lecturesRepository,
+            IUniversityRepository<TeacherDb> teachersRepository, IStudentRepository studentsRepository, ILogger<EmailProvider> logger)
         {
             _attendanceRepository = attendanceRepository;
             _studentsRepository = studentsRepository;

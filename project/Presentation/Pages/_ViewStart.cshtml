@@ -1,0 +1,12 @@
+﻿@{
+    var routeUrl = ViewContext.RouteData.Values["Page"].ToString();
+    var pages = new List<string> { "Admin" };
+    if (pages.Any(routeUrl.Contains))
+    {
+        Layout = "_AdminLayout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}

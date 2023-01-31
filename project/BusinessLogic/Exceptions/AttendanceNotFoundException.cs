@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace BusinessLogic
+﻿namespace BusinessLogic.Exceptions
 {
-    public class AttendanceNotFoundException : BusinessException
+    internal class AttendanceNotFoundException : BusinessException
     {
         public AttendanceNotFoundException(string message) : base(message) { }
     }

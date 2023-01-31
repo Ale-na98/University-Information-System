@@ -1,22 +1,29 @@
 ﻿using DataAccess;
+using BusinessLogic.Domain;
+using BusinessLogic.Services;
+using BusinessLogic.Providers;
+using DataAccess.Elasticsearch;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BusinessLogic
 {
     public static class Bootstrapper
     {
-        public static IServiceCollection AddBusinessLogic(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddBusinessLogic(this IServiceCollection services, IConfiguration configuration)
         {
             return services
-                .AddScoped<IStudentsService, StudentsService>()
-                .AddScoped<ITeachersService, TeachersService>()
-                .AddScoped<ILecturesService, LecturesService>()
-                .AddScoped<IHometasksService, HometasksService>()
-                .AddScoped<IAttendanceService, AttendanceService>()
-                .AddScoped<IEmailProvider, EmailProvider>()
-                .AddScoped<ISmsProvider, SmsProvider>()
+                .AddScoped<SmsProvider>()
+                .AddScoped<GroupService>()
+                .AddScoped<EmailProvider>()
+                .AddScoped<StudentService>()
+                .AddScoped<LectureService>()
+                .AddScoped<AttendanceService>()
+                .AddScoped<ElasticsearchService>()
+                .AddScoped<ElasticsearchRepository<Student>>()
                 .AddAutoMapper(typeof(MapperProfile))
-                .AddDataAccess(connectionString);
+                .AddElasticsearch(configuration)
+                .AddDataAccess(configuration);
         }
     }
 }

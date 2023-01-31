@@ -1,0 +1,73 @@
+﻿@page
+@model Presentation.Pages.Admin.ElasticsearchModel
+@{
+}
+
+<div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Students
+            <form method="post">
+                <span role="group" class="btn-group">
+                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
+                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
+                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                </span>
+            </form>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Teachers
+            <form method="post">
+                <span role="group" class="btn-group">
+                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
+                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
+                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                </span>
+            </form>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+             Lectures
+            <form method="post">
+                <span role="group" class="btn-group">
+                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
+                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
+                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                </span>
+            </form>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+             Groups
+            <form method="post">
+                <span role="group" class="btn-group">
+                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
+                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
+                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                </span>
+            </form>
+        </li>
+    </ul>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("form #save").on("click", function() {
+                $.ajax({
+                    url: "?handler=Save",
+                    method: "POST"
+                })
+            });
+            $("form #reindex").on("click", function() {
+                $.ajax({
+                    url: "?handler=Reindex",
+                    method: "POST"
+                })
+            });
+            $("form #delete").on("click", function() {
+                $.ajax({
+                    url: "?handler=Delete",
+                    method: "POST"
+                })
+            });
+    </script>
+}

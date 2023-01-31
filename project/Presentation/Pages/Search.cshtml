@@ -1,0 +1,52 @@
+﻿@page
+@model SearchModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="row">
+    <form class="row g-2" method="post">
+        <div class="col-auto">
+            <input type="search" asp-for="Query" class="form-control" placeholder="Search..." />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-secondary mb-3">Search</button>
+        </div>
+    </form>
+
+    @if (Model.Documents.Any())
+    {
+        <div class="text-center mb-3">
+            <h3>Search Results</h3>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StudentDetailsViewModel.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StudentDetailsViewModel.GroupName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Documents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Group.Name)
+                            </td>
+                        <td>
+                            <a asp-page="Students/Details" asp-route-id="@item.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
