@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace DataAccess
+namespace DataAccess.Entities
 {
     public record LectureDb
     {
@@ -11,7 +10,8 @@ namespace DataAccess
         public TeacherDb Teacher { get; set; }
         public int? TeacherId { get; set; }
 
-        public ICollection<HometaskDb> Hometasks { get; set; }
-        public ICollection<AttendanceDb> Students { get; set; }
+        public IList<HometaskDb> Hometasks { get; set; }
+        public IList<AttendanceDb> Students { get; set; }
+        public IList<ScheduleDb> Schedule { get; set; }
     }
 }

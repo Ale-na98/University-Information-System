@@ -1,0 +1,154 @@
+﻿@page
+@model Presentation.Pages.Attendance.IndexModel
+@{
+    ViewData["Title"] = "Attendance";
+}
+
+<div class="row text-center">
+    <h1>Attendance</h1>
+</div>
+
+<div class="row">
+    <div class="col-3-5 text-center">
+        <form method="get">
+            <div class="mb-3">
+                <label class="form-label" asp-for="GroupId"></label>
+                <select class="form-select" asp-for="GroupId" asp-items="@Model.Groups">
+                    <option value="">Select a group</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="SearchAttendanceForm.StudentId"></label>
+                <select class="form-select" asp-for="SearchAttendanceForm.StudentId" asp-items="@Model.Students">
+                    <option value="">Select a student</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="SearchAttendanceForm.LectureId"></label>
+                <select class="form-select" asp-for="SearchAttendanceForm.LectureId" asp-items="@Model.Lectures">
+                    <option value="">Select a lecture</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="SearchAttendanceForm.DateFrom"></label>
+                <input class="form-control" type="datetime-local" asp-for="SearchAttendanceForm.DateFrom"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SearchAttendanceForm.DateTo" class="form-label"></label>
+                <input class="form-control" type="datetime-local" asp-for="SearchAttendanceForm.DateTo"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button id="reset" class="btn btn-secondary" type="submit">Reset</button>
+        </form>
+    </div>
+
+    <div class="col">
+        @if (!Model.AttendanceDetailsViewModelList.Any())
+        {
+            <div class="alert alert-primary" role="alert">
+                Sorry, there are no attendances with such parameters.
+            </div>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead class="text-center">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttendanceDetailsViewModelList[0].LectureName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttendanceDetailsViewModelList[0].LectureDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttendanceDetailsViewModelList[0].Presence)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttendanceDetailsViewModelList[0].HometaskDone)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.AttendanceDetailsViewModelList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LectureName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LectureDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Presence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HometaskDone)
+                        </td>
+                        <td>
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+            <div class="mb-3">
+                <ul class="pagination">
+                @for (var i = 1; i <= Model.AttendancePage.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        @{
+                            var urlParms = new Dictionary<string, string>
+                            {
+                                { "CurrentPage", i.ToString() },
+                                { "GroupId", Model.GroupId.ToString() },
+                                { "StudentId", Model.SearchAttendanceForm.StudentId.ToString() },
+                                { "LectureId", Model.SearchAttendanceForm.LectureId.ToString() },
+                                { "DateFrom", Model.SearchAttendanceForm.DateFrom.ToString() },
+                                { "DateTo", Model.SearchAttendanceForm.DateTo.ToString() },
+                            };
+                        }
+                       <a class="page-link" asp-page="./Index" asp-all-route-data="urlParms">@i</a>
+                    </li>
+                }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+            <script>
+                $(function () {
+                    $("#GroupId").on("change", function() {
+                        var groupId = $(this).val();
+                        $("#SearchAttendanceForm_StudentId").empty();
+                        $("#SearchAttendanceForm_StudentId").append("<option value=''>Select a student</option>");
+
+                        $("#SearchAttendanceForm_LectureId").empty();
+                        $("#SearchAttendanceForm_LectureId").append("<option value=''>Select a lecture</option>");
+
+                        $.getJSON(`?handler=Students&groupId=${groupId}`, (data) => {
+                            $.each(data, function (i, item) {
+                                $("#SearchAttendanceForm_StudentId").append(`<option value="${item.id}">${item.fullName}</option>`);
+                            });
+                        });
+
+                        $.getJSON(`?handler=Lectures&groupId=${groupId}`, (data) => {
+                            $.each(data, function (i, item) {
+                                $("#SearchAttendanceForm_LectureId").append(`<option value="${item.id}">${item.name}</option>`);
+                            });
+                        });
+                    });
+
+                    $('form #reset').on('click', function(e) {
+                        $('#GroupId').prop('selectedIndex',0);
+                        $("#SearchAttendanceForm_StudentId").prop('selectedIndex',0);
+                        $("#SearchAttendanceForm_LectureId").prop('selectedIndex',0);
+                        $("#SearchAttendanceForm_DateFrom").val('');
+                        $("#SearchAttendanceForm_DateTo").val('');
+                    });
+                });
+            </script>
+}

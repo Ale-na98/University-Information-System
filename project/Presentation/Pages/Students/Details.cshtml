@@ -1,0 +1,46 @@
+﻿@page
+@model Presentation.Pages.Students.DetailsModel
+@{
+    ViewData["Title"] = "Student details";
+}
+
+<h3>@Html.DisplayFor(model => model.StudentDetailsViewModel.FullName)</h3>
+<div>
+    <hr />
+    <div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.FullName" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.FullName)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.Email" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.Email)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.PhoneNumber" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.PhoneNumber)
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-sm-2">
+                <label asp-for="StudentDetailsViewModel.GroupName" class="col-form-label"></label>
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.StudentDetailsViewModel.GroupName)
+            </div>
+        </div>
+        <br />
+        <a role="button" class="btn btn-secondary" asp-page="/Search">Back to List</a>
+    </div>
+</div>

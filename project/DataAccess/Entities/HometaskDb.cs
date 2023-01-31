@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace DataAccess
+namespace DataAccess.Entities
 {
     public record HometaskDb
     {
         public int Id { get; set; }
         public DateTime HometaskDate { get; set; }
-        public byte Mark { get; set; }
+        public int Mark { get; set; }
 
         public StudentDb Student { get; set; }
         public int StudentId { get; set; }

@@ -1,0 +1,140 @@
+﻿@page
+@model Presentation.Pages.Admin.Students.IndexModel
+@{
+    ViewData["Title"] = "Students";
+}
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col text-center">
+        <h1>Students</h1>
+    </div>
+    <div class="col text-end">
+        <a role="button" class="btn btn-primary" asp-page="Create">Create new</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3-5 text-center">
+        <form method="get">
+            <div class="mb-3">
+                <label  class="form-label" asp-for="SearchStudentForm.Id"></label>
+                <input class="form-control" type="number" asp-for="SearchStudentForm.Id" placeholder="1"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SearchStudentForm.FullName" class="form-label"></label>
+                <input type="text" asp-for="SearchStudentForm.FullName" class="form-control" placeholder="Ivan Ivanov"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SearchStudentForm.Email" class="form-label"></label>
+                <input type="email" asp-for="SearchStudentForm.Email" class="form-control" placeholder="fullname@example.com"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SearchStudentForm.PhoneNumber" class="form-label"></label>
+                <input asp-for="SearchStudentForm.PhoneNumber" class="form-control"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="SearchStudentForm.Group" class="form-label"></label>
+                <input asp-for="SearchStudentForm.Group" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="reset" type="submit" class="btn btn-secondary">Reset</button>
+        </form>
+    </div>
+
+    <div class="col">
+        @if (!Model.StudentDetailsViewModelList.Any())
+        {
+            <div class="alert alert-primary" role="alert">
+                Sorry, there are no students with such data.
+            </div>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentDetailsViewModelList[0].Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentDetailsViewModelList[0].FullName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentDetailsViewModelList[0].Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentDetailsViewModelList[0].PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentDetailsViewModelList[0].GroupName)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.StudentDetailsViewModelList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GroupName)
+                             </td>
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="mb-3">
+                <ul class="pagination">
+                    @for (var i = 1; i <= Model.StudentPage.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                            @{
+                                var urlParms = new Dictionary<string, string>
+                                {
+                                    { "CurrentPage", i.ToString() },
+                                    { "Id", Model.SearchStudentForm.Id.ToString() },
+                                    { "FullName", Model.SearchStudentForm.FullName },
+                                    { "Email", Model.SearchStudentForm.Email },
+                                    { "PhoneNumber", Model.SearchStudentForm.PhoneNumber },
+                                    { "Group", Model.SearchStudentForm.Group },
+                                };
+                            }
+                            <a asp-page="./Index" asp-all-route-data="urlParms" class="page-link">@i</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('form #reset').on('click', function(e) {
+                $('#SearchStudentForm_Id').val('');
+                $('#SearchStudentForm_FullName').val('');
+                $('#SearchStudentForm_Email').val('');
+                $('#SearchStudentForm_PhoneNumber').val('');
+                $('#SearchStudentForm_Group').val('');
+            });
+        });
+    </script>
+}

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BusinessLogic
+﻿namespace BusinessLogic.Exceptions
 {
     public class StudentNotFoundException : BusinessException
     {
