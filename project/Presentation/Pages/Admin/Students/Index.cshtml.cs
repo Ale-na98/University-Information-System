@@ -16,7 +16,7 @@ namespace Presentation.Pages.Admin.Students
 
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 9;
 
         [BindProperty(SupportsGet = true)]
         public SearchStudentForm SearchStudentForm { get; set; } = new SearchStudentForm();

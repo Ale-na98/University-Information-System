@@ -4,39 +4,41 @@
     ViewData["Title"] = "Edit";
 }
 
-<h3>Edit the student:</h3>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EditStudentForm.Id" />
-            <div class="mb-3">
-                <label asp-for="EditStudentForm.FullName" class="form-label"></label>
-                <input type="text" asp-for="EditStudentForm.FullName" class="form-control" />
-                <span asp-validation-for="EditStudentForm.FullName" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="EditStudentForm.Email" class="form-label"></label>
-                <input type="email" asp-for="EditStudentForm.Email" class="form-control" />
-                <span asp-validation-for="EditStudentForm.Email" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="EditStudentForm.PhoneNumber" class="form-label"></label>
-                <input asp-for="EditStudentForm.PhoneNumber" class="form-control" />
-                <span asp-validation-for="EditStudentForm.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="EditStudentForm.GroupId" class="form-label"></label>
-                <select asp-for="EditStudentForm.GroupId" class="form-select" asp-items="@Model.Groups">
-                    <option value="0">Select a group</option>
-                </select>
-                <span asp-validation-for="EditStudentForm.GroupId" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a role="button" class="btn btn-secondary" asp-page="./Index" >Back to List</a>
-        </form>
+<div class="col-md-4">
+    <div class="align-middle p-3 my-3 bg-warning rounded shadow-sm">
+        <h1 class="fs-4 mb-0 text-black">Edit the student:</h1>
     </div>
+
+    <form method="post" class="p-4 bg-body border shadow-sm rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="EditStudentForm.Id" />
+        <div class="mb-3">
+            <label asp-for="EditStudentForm.FullName" class="form-label"></label>
+            <input type="text" asp-for="EditStudentForm.FullName" class="form-control" />
+            <span asp-validation-for="EditStudentForm.FullName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="EditStudentForm.Email" class="form-label"></label>
+            <input type="email" asp-for="EditStudentForm.Email" class="form-control" />
+            <span asp-validation-for="EditStudentForm.Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="EditStudentForm.PhoneNumber" class="form-label"></label>
+            <input asp-for="EditStudentForm.PhoneNumber" class="form-control" />
+            <span asp-validation-for="EditStudentForm.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-5">
+            <label asp-for="EditStudentForm.GroupId" class="form-label"></label>
+            <select asp-for="EditStudentForm.GroupId" class="form-select" asp-items="@Model.Groups">
+                <option value="0">Select a group</option>
+            </select>
+            <span asp-validation-for="EditStudentForm.GroupId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-warning">Save</button>
+            <a role="button" class="btn btn-secondary" asp-page="./Index" >Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
