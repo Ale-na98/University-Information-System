@@ -1,12 +1,16 @@
 ﻿@page
 @model Presentation.Pages.Admin.ElasticsearchModel
 @{
+    ViewData["Title"] = "Elasticsearch";
 }
 
-<div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Students
+<div class="my-3 p-3 bg-body border shadow-sm rounded">
+    <h1 class="fs-3 pb-2 mb-0 text-center border-bottom">Elasticsearch Indexes</h1>
+    <div class="d-flex justify-content-between align-items-center border-bottom">
+        <div class="p-2 flex-grow-1">
+            <span>Students</span>
+        </div>
+        <div class="p-2 text-center">
             <form method="post">
                 <span role="group" class="btn-group">
                     <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
@@ -14,9 +18,13 @@
                     <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Teachers
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center border-bottom">
+        <div class="p-2 flex-grow-1">
+            <span>Teachers</span>
+        </div>
+        <div class="p-2">
             <form method="post">
                 <span role="group" class="btn-group">
                     <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
@@ -24,9 +32,13 @@
                     <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-             Lectures
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center border-bottom">
+        <div class="p-2 flex-grow-1">
+            <span>Lectures</span>
+        </div>
+        <div class="p-2">
             <form method="post">
                 <span role="group" class="btn-group">
                     <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
@@ -34,9 +46,13 @@
                     <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-             Groups
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center border-bottom">
+        <div class="p-2 flex-grow-1">
+            <span>Groups</span>
+        </div>
+        <div class="p-2">
             <form method="post">
                 <span role="group" class="btn-group">
                     <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
@@ -44,8 +60,8 @@
                     <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 
 @section scripts{

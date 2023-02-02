@@ -4,38 +4,40 @@
     ViewData["Title"] = "Create";
 }
 
-<h3>Create a new student:</h3>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <label asp-for="CreateStudentForm.FullName" class="form-label"></label>
-                <input type="text" asp-for="CreateStudentForm.FullName" class="form-control" placeholder="Ivan Ivanov"/>
-                <span asp-validation-for="CreateStudentForm.FullName" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="CreateStudentForm.Email" class="form-label"></label>
-                <input type="email" asp-for="CreateStudentForm.Email" class="form-control" placeholder="fullname@example.com"/>
-                <span asp-validation-for="CreateStudentForm.Email" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="CreateStudentForm.PhoneNumber" class="form-label"> </label>
-                <input asp-for="CreateStudentForm.PhoneNumber" class="form-control"/>
-                <span asp-validation-for="CreateStudentForm.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="CreateStudentForm.GroupId" class="form-label"></label>
-                <select asp-for="CreateStudentForm.GroupId" class="form-select" asp-items="@Model.Groups">
-                    <option value="0">Select a group</option>
-                </select>
-                <span asp-validation-for="CreateStudentForm.GroupId" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-            <a role="button" class="btn btn-secondary" asp-page="./Index" >Back to List</a>
-        </form>
+<div class="col-md-4">
+    <div class="align-middle p-3 my-3 bg-success rounded shadow-sm">
+        <h1 class="fs-4 mb-0 text-white">Create new student:</h1>
     </div>
+
+    <form method="post" class="p-4 bg-body border shadow-sm rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="CreateStudentForm.FullName" class="form-label"></label>
+            <input type="text" asp-for="CreateStudentForm.FullName" class="form-control" placeholder="Ivan Ivanov"/>
+            <span asp-validation-for="CreateStudentForm.FullName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CreateStudentForm.Email" class="form-label"></label>
+            <input type="email" asp-for="CreateStudentForm.Email" class="form-control" placeholder="fullname@example.com"/>
+            <span asp-validation-for="CreateStudentForm.Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CreateStudentForm.PhoneNumber" class="form-label"> </label>
+            <input asp-for="CreateStudentForm.PhoneNumber" class="form-control"/>
+            <span asp-validation-for="CreateStudentForm.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-5">
+            <label asp-for="CreateStudentForm.GroupId" class="form-label"></label>
+            <select asp-for="CreateStudentForm.GroupId" class="form-select" asp-items="@Model.Groups">
+                <option value="0">Select a group</option>
+            </select>
+            <span asp-validation-for="CreateStudentForm.GroupId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Create</button>
+            <a role="button" class="btn btn-secondary" asp-page="./Index" >Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

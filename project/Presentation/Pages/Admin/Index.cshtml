@@ -3,3 +3,98 @@
 @{
     ViewData["Title"] = "Admin";
 }
+
+<div class="row align-items-md-stretch">
+      <div class="col-md-4">
+          <div class="h-60 p-4 bg-body border shadow-sm rounded">
+              <h2>User activity</h2>
+              <p>Current user activity, activity statistics.</p>
+              <button type="button" class="btn btn-success">Statistics</button>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="h-60 p-4 bg-body border shadow-sm rounded">
+              <h2>Resources</h2>
+              <p>Server resource usage, usage statistics.</p>
+              <button type="button" class="btn btn-warning">Statistics</button>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="h-60 p-4 bg-body border shadow-sm rounded">
+              <h2>System logs</h2>
+              <p>Major system events.</p>
+              <button type="button" class="btn btn-danger">Show</button>
+          </div>
+      </div>
+</div>
+
+<div class="my-3 p-3 bg-body border shadow-sm rounded">
+    <h6 class="border-bottom pb-2 mb-0">Tasks</h6>
+    <div class="d-flex align-items-center border-bottom">
+        <div class="p-2">
+            <svg class="bd-placeholder-img me-2 rounded" width="32" height="32">
+                <rect width="100%" height="100%" fill="#dc3545"></rect>
+            </svg>
+        </div>
+        <div class="p-2 flex-grow-1 small">
+            <span>Add new student: {Full name: Mikhail Kiselev, Email: mikhailkiselev@gmail.com, Phone number: 89163384759, Group: 6503}</span>
+        </div>
+        <div class="p-2">
+            <span class="badge bg-success rounded-4">DONE</span>
+        </div>
+        <div class="p-2">
+            <button type="button" class="btn btn-outline-dark">Info</button>
+        </div>
+    </div>
+    <div class="d-flex align-items-center border-bottom">
+        <div class="p-2">
+            <svg class="bd-placeholder-img me-2 rounded" width="32" height="32">
+                <rect width="100%" height="100%" fill="#0d6efd"></rect>
+            </svg>
+        </div>
+        <div class="p-2 flex-grow-1 small">
+            <span>Weekly update elsticsearch index "students"</span>
+        </div>
+        <div class="p-2">
+            <span class="badge bg-secondary rounded-4">In progress</span>
+        </div>
+        <div class="p-2">
+            <button type="button" class="btn btn-outline-dark">Info</button>
+        </div>
+    </div>
+    <div class="d-flex align-items-center border-bottom">
+        <div class="p-2">
+            <svg class="bd-placeholder-img me-2 rounded" width="32" height="32">
+                <rect width="100%" height="100%" fill="#dc3545"></rect>
+            </svg>
+        </div>
+        <div class="p-2 flex-grow-1 small">
+            <span>Add new group: {Name: 6504}</span>
+        </div>
+        <div class="p-2">
+            <span class="badge bg-primary rounded-4">TO DO</span>
+        </div>
+        <div class="p-2">
+            <button type="button" class="btn btn-outline-dark">Info</button>
+        </div>
+    </div>
+    <div class="d-flex align-items-center border-bottom">
+        <div class="p-2">
+            <svg class="bd-placeholder-img me-2 rounded" width="32" height="32">
+                <rect width="100%" height="100%" fill="#ffc107"></rect>
+            </svg>
+        </div>
+        <div class="p-2 flex-grow-1 small">
+            <span>Update student: {Id: 10} -> {Phone number: 89169573145}</span>
+        </div>
+        <div class="p-2">
+            <span class="badge bg-primary rounded-4">TO DO</span>
+        </div>
+        <div class="p-2">
+            <button type="button" class="btn btn-outline-dark">Info</button>
+        </div>
+    </div>
+    <small class="d-block text-end mt-3">
+        <a href="#">Show all tasks</a>
+    </small>
+</div>

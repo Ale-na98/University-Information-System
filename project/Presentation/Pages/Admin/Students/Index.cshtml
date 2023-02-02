@@ -7,42 +7,44 @@
 <div class="row">
     <div class="col"></div>
     <div class="col text-center">
-        <h1>Students</h1>
+        <h2>Students</h2>
     </div>
     <div class="col text-end">
         <a role="button" class="btn btn-primary" asp-page="Create">Create new</a>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-3-5 text-center">
+<div class="d-flex">
+    <div class="text-center mt-3 p-3 bg-body border shadow-sm rounded">
         <form method="get">
-            <div class="mb-3">
-                <label  class="form-label" asp-for="SearchStudentForm.Id"></label>
+            <div class="mb-2">
+                <label class="form-label" asp-for="SearchStudentForm.Id"></label>
                 <input class="form-control" type="number" asp-for="SearchStudentForm.Id" placeholder="1"/>
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
                 <label asp-for="SearchStudentForm.FullName" class="form-label"></label>
                 <input type="text" asp-for="SearchStudentForm.FullName" class="form-control" placeholder="Ivan Ivanov"/>
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
                 <label asp-for="SearchStudentForm.Email" class="form-label"></label>
                 <input type="email" asp-for="SearchStudentForm.Email" class="form-control" placeholder="fullname@example.com"/>
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
                 <label asp-for="SearchStudentForm.PhoneNumber" class="form-label"></label>
                 <input asp-for="SearchStudentForm.PhoneNumber" class="form-control"/>
             </div>
-            <div class="mb-3">
+            <div class="mb-5">
                 <label asp-for="SearchStudentForm.Group" class="form-label"></label>
                 <input asp-for="SearchStudentForm.Group" class="form-control"/>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button id="reset" type="submit" class="btn btn-secondary">Reset</button>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="reset" type="submit" class="btn btn-secondary">Reset</button>
+            </div>
         </form>
     </div>
 
-    <div class="col">
+    <div class="flex-grow-1 mt-3 p-3 bg-body border shadow-sm rounded">
         @if (!Model.StudentDetailsViewModelList.Any())
         {
             <div class="alert alert-primary" role="alert">
@@ -90,7 +92,7 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.GroupName)
-                             </td>
+                                </td>
                             <td>
                                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -100,8 +102,8 @@
                 </tbody>
             </table>
 
-            <div class="mb-3">
-                <ul class="pagination">
+            <div>
+                <ul class="pagination mb-0">
                     @for (var i = 1; i <= Model.StudentPage.TotalPages; i++)
                     {
                         <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
@@ -122,6 +124,7 @@
                 </ul>
             </div>
         }
+        
     </div>
 </div>
 
