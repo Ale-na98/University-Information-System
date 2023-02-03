@@ -7,7 +7,7 @@
 <form method="post">
     <div class="input-group mb-3 shadow-sm rounded">
         <input type="search" class="form-control" asp-for="Query" placeholder="Search...">
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary" asp-page-handler="SearchStudents">Search</button>
     </div>
 </form>
 

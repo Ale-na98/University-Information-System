@@ -1,7 +1,6 @@
 ﻿using Nest;
 using System;
 using Microsoft.Extensions.Configuration;
-using DataAccess.Elasticsearch.Documents;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DataAccess.Elasticsearch
@@ -18,14 +17,7 @@ namespace DataAccess.Elasticsearch
 
             IElasticClient client = new ElasticClient(settings);
 
-            CreateIndex(client, defaultIndex);
-
             return services.AddSingleton(client);
-        }
-
-        private static void CreateIndex(IElasticClient client, string indexName)
-        {
-            client.Indices.Create(indexName, index => index.Map<StudentDocument>(x => x.AutoMap()));
         }
     }
 }

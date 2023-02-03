@@ -1,9 +1,9 @@
 using BusinessLogic.Domain;
 using BusinessLogic.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Presentation.DataTransferObjects.Students;
-using System.Collections.Generic;
 
 namespace Presentation.Pages
 {
@@ -22,9 +22,9 @@ namespace Presentation.Pages
             _elasticsearchService = elasticsearchService;
         }
 
-        public void OnPost()
+        public void OnPostSearchStudents()
         {
-            Documents = _elasticsearchService.Search(Query);
+            Documents = _elasticsearchService.SearchStudents(Query);
         }
     }
 }

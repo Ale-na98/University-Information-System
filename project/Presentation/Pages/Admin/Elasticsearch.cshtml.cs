@@ -6,6 +6,7 @@ namespace Presentation.Pages.Admin
 {
     public class ElasticsearchModel : PageModel
     {
+        private readonly string _studentIndexName = "students";
         private readonly ElasticsearchService _elasticsearchService;
 
         public ElasticsearchModel(ElasticsearchService elasticsearchService, IMapper mapper)
@@ -13,20 +14,20 @@ namespace Presentation.Pages.Admin
             _elasticsearchService = elasticsearchService;
         }
 
-        public void OnPostSave()
+        public void OnPostCreateStudentIndex()
         {
-            _elasticsearchService.SaveMany();
+            _elasticsearchService.CreateStudentIndex(_studentIndexName);
         }
 
-        public void OnPostReindex()
+        public void OnPostRecreateStudentIndex()
         {
-            _elasticsearchService.DeleteMany();
-            _elasticsearchService.SaveMany();
+            _elasticsearchService.DeleteIndex(_studentIndexName);
+            _elasticsearchService.CreateStudentIndex(_studentIndexName);
         }
 
-        public void OnPostDelete()
+        public void OnPostDeleteStudentIndex()
         {
-            _elasticsearchService.DeleteMany();
+            _elasticsearchService.DeleteIndex(_studentIndexName);
         }
     }
 }
