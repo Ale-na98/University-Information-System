@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Presentation.DataTransferObjects.Attendance;
 using System.ComponentModel.DataAnnotations;
+using Presentation.DataTransferObjects.Attendance;
 
 namespace Presentation.Pages.Attendance
 {
@@ -21,7 +21,7 @@ namespace Presentation.Pages.Attendance
 
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 9;
 
 
         [BindProperty(SupportsGet = true), Display(Name = "Group")]

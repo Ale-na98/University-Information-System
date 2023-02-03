@@ -4,18 +4,28 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to UIS!</h1>
-    <ul class="navbar-nav flex-grow-1">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Index">Admin</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Search">Search</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Attendance/Index">Attendance</a>
-        </li>
-    </ul>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="my-5 text-black text-center">Welcome to UIS!</h1>
+
+<div class="row align-items-md-stretch">
+      <div class="col-md-4">
+          <div class="h-60 p-4 bg-body border shadow-sm rounded">
+              <h3>Admin area</h3>
+              <p>Allows to manage student records as well as elasticsearch indexes.</p>
+              <a role="button" class="btn btn-success" asp-page="/Admin/Index">Go</a>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="h-60 p-4 bg-body border shadow-sm rounded">
+              <h3>Search</h3>
+              <p>Allows to search for registered students by name, group and ect.</p>
+              <a role="button" class="btn btn-warning" asp-page="/Search">Start searching</a>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="h-60 p-4 bg-body border shadow-sm rounded">
+              <h3>Students attendance</h3>
+              <p>Allows to search for student attendance by filters.</p>
+              <a role="button" class="btn btn-danger" asp-page="/Attendance/Index">Show</a>
+          </div>
+      </div>
 </div>
