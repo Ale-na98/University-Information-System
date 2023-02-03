@@ -5,11 +5,11 @@
 }
 
 <div class="row text-center">
-    <h1>Attendance</h1>
+    <h2>Attendance</h2>
 </div>
 
-<div class="row">
-    <div class="col-3-5 text-center">
+<div class="d-flex">
+    <div class="text-center mt-3 p-3 bg-body border shadow-sm rounded">
         <form method="get">
             <div class="mb-3">
                 <label class="form-label" asp-for="GroupId"></label>
@@ -31,18 +31,20 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" asp-for="SearchAttendanceForm.DateFrom"></label>
-                <input class="form-control" type="datetime-local" asp-for="SearchAttendanceForm.DateFrom"/>
+                <input type="datetime-local" class="form-control" asp-for="SearchAttendanceForm.DateFrom"/>
             </div>
             <div class="mb-3">
                 <label asp-for="SearchAttendanceForm.DateTo" class="form-label"></label>
-                <input class="form-control" type="datetime-local" asp-for="SearchAttendanceForm.DateTo"/>
+                <input type="datetime-local" class="form-control" asp-for="SearchAttendanceForm.DateTo"/>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
-            <button id="reset" class="btn btn-secondary" type="submit">Reset</button>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="reset" type="submit" class="btn btn-secondary">Reset</button>
+            </div>
         </form>
     </div>
 
-    <div class="col">
+    <div class="flex-grow-1 mt-3 p-3 bg-body border shadow-sm rounded">
         @if (!Model.AttendanceDetailsViewModelList.Any())
         {
             <div class="alert alert-primary" role="alert">
@@ -52,7 +54,7 @@
         else
         {
             <table class="table table-striped">
-                <thead class="text-center">
+                <thead>
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.AttendanceDetailsViewModelList[0].LectureName)
@@ -70,48 +72,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.AttendanceDetailsViewModelList)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LectureName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LectureDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Presence)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HometaskDone)
-                        </td>
-                        <td>
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
+                    @foreach (var item in Model.AttendanceDetailsViewModelList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LectureName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LectureDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Presence)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HometaskDone)
+                            </td>
+                            <td>
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
 
-            <div class="mb-3">
-                <ul class="pagination">
-                @for (var i = 1; i <= Model.AttendancePage.TotalPages; i++)
-                {
-                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                        @{
-                            var urlParms = new Dictionary<string, string>
-                            {
-                                { "CurrentPage", i.ToString() },
-                                { "GroupId", Model.GroupId.ToString() },
-                                { "StudentId", Model.SearchAttendanceForm.StudentId.ToString() },
-                                { "LectureId", Model.SearchAttendanceForm.LectureId.ToString() },
-                                { "DateFrom", Model.SearchAttendanceForm.DateFrom.ToString() },
-                                { "DateTo", Model.SearchAttendanceForm.DateTo.ToString() },
-                            };
-                        }
-                       <a class="page-link" asp-page="./Index" asp-all-route-data="urlParms">@i</a>
-                    </li>
-                }
+            <div>
+                <ul class="pagination mb-0">
+                    @for (var i = 1; i <= Model.AttendancePage.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                            @{
+                                var urlParms = new Dictionary<string, string>
+                                {
+                                    { "CurrentPage", i.ToString() },
+                                    { "GroupId", Model.GroupId.ToString() },
+                                    { "StudentId", Model.SearchAttendanceForm.StudentId.ToString() },
+                                    { "LectureId", Model.SearchAttendanceForm.LectureId.ToString() },
+                                    { "DateFrom", Model.SearchAttendanceForm.DateFrom.ToString() },
+                                    { "DateTo", Model.SearchAttendanceForm.DateTo.ToString() }
+                                };
+                            }
+                            <a class="page-link" asp-page="./Index" asp-all-route-data="urlParms">@i</a>
+                        </li>
+                    }
                 </ul>
             </div>
         }

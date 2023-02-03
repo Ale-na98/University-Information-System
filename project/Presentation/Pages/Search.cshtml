@@ -4,21 +4,16 @@
     ViewData["Title"] = "Search";
 }
 
-<div class="row">
-    <form class="row g-2" method="post">
-        <div class="col-auto">
-            <input type="search" asp-for="Query" class="form-control" placeholder="Search..." />
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-secondary mb-3">Search</button>
-        </div>
-    </form>
+<form method="post">
+    <div class="input-group mb-3 shadow-sm rounded">
+        <input type="search" class="form-control" asp-for="Query" placeholder="Search...">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
 
-    @if (Model.Documents.Any())
-    {
-        <div class="text-center mb-3">
-            <h3>Search Results</h3>
-        </div>
+@if (Model.Documents.Any())
+{
+    <div class="p-3 bg-body border shadow-sm rounded">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -40,13 +35,13 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Group.Name)
-                            </td>
-                        <td>
+                        </td>
+                        <td class="text-center">
                             <a asp-page="Students/Details" asp-route-id="@item.Id">Details</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    }
-</div>
+    </div>
+}
