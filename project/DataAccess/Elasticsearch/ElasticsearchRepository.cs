@@ -12,6 +12,18 @@ namespace DataAccess.Elasticsearch
             _elasticClient = elasticClient;
         }
 
+        public void CreateIndex(string indexName)
+        {
+            _elasticClient
+                .Indices
+                    .Create(indexName, index => index.Map<T>(x => x.AutoMap()));
+        }
+
+        public void DeleteIndex(string indexName)
+        {
+            _elasticClient.Indices.Delete(indexName);
+        }
+
         public void SaveSingle(T document)
         {
             _elasticClient.IndexDocument(document);
@@ -39,11 +51,6 @@ namespace DataAccess.Elasticsearch
         public void DeleteSingle(T id)
         {
             _elasticClient.Delete<T>(id);
-        }
-
-        public void DeleteMany(IList<T> document)
-        {
-            _elasticClient.DeleteMany<T>(document);
         }
     }
 }

@@ -13,9 +13,9 @@
         <div class="p-2 text-center">
             <form method="post">
                 <span role="group" class="btn-group">
-                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
-                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
-                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                    <button id="create" type="submit" class="btn btn-success" asp-page-handler="CreateStudentIndex">Create</button>
+                    <button id="recreate" type="submit" class="btn btn-warning" asp-page-handler="RecreateStudentIndex">Recreate</button>
+                    <button id="delete" type="submit" class="btn btn-danger" asp-page-handler="DeleteStudentIndex">Delete</button>
                 </span>
             </form>
         </div>
@@ -27,9 +27,9 @@
         <div class="p-2">
             <form method="post">
                 <span role="group" class="btn-group">
-                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
-                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
-                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                    <button id="create" type="submit" class="btn btn-success" asp-page-handler="Create">Create</button>
+                    <button id="recreate" type="submit" class="btn btn-warning" asp-page-handler="Recreate">Recreate</button>
+                    <button id="delete" type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
         </div>
@@ -41,9 +41,9 @@
         <div class="p-2">
             <form method="post">
                 <span role="group" class="btn-group">
-                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
-                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
-                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                    <button id="create" type="submit" class="btn btn-success" asp-page-handler="Create">Create</button>
+                    <button id="recreate" type="submit" class="btn btn-warning" asp-page-handler="Recreate">Recreate</button>
+                    <button id="delete" type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
         </div>
@@ -55,9 +55,9 @@
         <div class="p-2">
             <form method="post">
                 <span role="group" class="btn-group">
-                    <button id="save" class="btn btn-success" asp-page-handler="Save">Save</button>
-                    <button id="reindex" class="btn btn-warning" asp-page-handler="Reindex">Reindex</button>
-                    <button id="delete" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                    <button id="create" type="submit" class="btn btn-success" asp-page-handler="Create">Create</button>
+                    <button id="recreate" type="submit" class="btn btn-warning" asp-page-handler="Recreate">Recreate</button>
+                    <button id="delete" type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
                 </span>
             </form>
         </div>
@@ -67,21 +67,21 @@
 @section scripts{
     <script>
         $(function () {
-            $("form #save").on("click", function() {
+            $("form #create").on("click", function() {
                 $.ajax({
-                    url: "?handler=Save",
+                    url: "?handler=CreateStudentIndex",
                     method: "POST"
                 })
             });
-            $("form #reindex").on("click", function() {
+            $("form #recreate").on("click", function() {
                 $.ajax({
-                    url: "?handler=Reindex",
+                    url: "?handler=RecreateStudentIndex",
                     method: "POST"
                 })
             });
             $("form #delete").on("click", function() {
                 $.ajax({
-                    url: "?handler=Delete",
+                    url: "?handler=DeleteStudentIndex",
                     method: "POST"
                 })
             });

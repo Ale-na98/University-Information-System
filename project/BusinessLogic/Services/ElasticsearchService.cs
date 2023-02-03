@@ -10,17 +10,28 @@ namespace BusinessLogic.Services
     {
         private readonly IMapper _mapper;
         private readonly StudentService _studentService;
-        private readonly ElasticsearchRepository<StudentDocument> _elasticsearchRepository;
+        private readonly ElasticsearchRepository<StudentDocument> _studentElasticsearchRepository;
 
-        public ElasticsearchService(ElasticsearchRepository<StudentDocument> elasticsearchRepository,
+        public ElasticsearchService(ElasticsearchRepository<StudentDocument> studentElasticsearchRepository,
             StudentService studentService, IMapper mapper)
         {
             _mapper = mapper;
             _studentService = studentService;
-            _elasticsearchRepository = elasticsearchRepository;
+            _studentElasticsearchRepository = studentElasticsearchRepository;
         }
 
-        public void SaveMany()
+        public void CreateStudentIndex(string indexName)
+        {
+            _studentElasticsearchRepository.CreateIndex(indexName);
+            SaveManyStudents();
+        }
+
+        public void DeleteIndex(string indexName)
+        {
+            _studentElasticsearchRepository.DeleteIndex(indexName);
+        }
+
+        public void SaveManyStudents()
         {
             Page<Student> studentPage;
             var pageParams = new PageParams() { CurrentPage = 1, PageSize = 5 };
@@ -28,30 +39,16 @@ namespace BusinessLogic.Services
             {
                 studentPage = _studentService.GetAllWithGroups(pageParams);
                 var studentDocument = _mapper.Map<IList<StudentDocument>>(studentPage.Data);
-                _elasticsearchRepository.SaveMany(studentDocument);
+                _studentElasticsearchRepository.SaveMany(studentDocument);
                 pageParams.CurrentPage++;
             }
             while (pageParams.CurrentPage <= studentPage.TotalPages);
         }
 
-        public IEnumerable<Student> Search(string query)
+        public IEnumerable<Student> SearchStudents(string query)
         {
-            var students = _elasticsearchRepository.Search(query);
+            var students = _studentElasticsearchRepository.Search(query);
             return _mapper.Map<IEnumerable<Student>>(students);
-        }
-
-        public void DeleteMany()
-        {
-            Page<Student> studentPage;
-            var pageParams = new PageParams() { CurrentPage = 1, PageSize = 5 };
-            do
-            {
-                studentPage = _studentService.GetAllWithGroups(pageParams);
-                var studentDocument = _mapper.Map<IList<StudentDocument>>(studentPage.Data);
-                _elasticsearchRepository.DeleteMany(studentDocument);
-                pageParams.CurrentPage++;
-            }
-            while (pageParams.CurrentPage <= studentPage.TotalPages);
         }
     }
 }
