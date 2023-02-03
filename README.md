@@ -4,10 +4,10 @@
 ## Available functionality:
 ### 1. Admin zone
 - ### Student entity management (CRUD);
-- ### "students" index management in elasticsearch (create + save many, delete);
+- ### "students" index management in elasticsearch (create + save many, delete).
 ### 2. Shared access area
 - ### Search for students registered in the system by various parameters (name, group, etc.);
-- ### Search by student attendance filters;
+- ### Search by student attendance filters.
 
 ## Screenshots:
 ### 1. ![Main page of the application](docs/images/main_index.png)
