@@ -4,7 +4,7 @@ on: [push]
 
 env:
   AZURE_WEBAPP_NAME: UniversityInformationSystemApp
-  AZURE_WEBAPP_PACKAGE_PATH: './published'
+  AZURE_WEBAPP_PACKAGE_PATH: './project/published'
   DOTNET_VERSION: '6.0.x'
 
 jobs:
