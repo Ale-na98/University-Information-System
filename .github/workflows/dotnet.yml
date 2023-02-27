@@ -32,7 +32,7 @@ jobs:
       working-directory: project
 
     - name: Publish app for deploy
-      run: dotnet publish --no-build -c Release -o ../${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: dotnet publish ./Presentation/Presentation.csproj --no-build -c Release -o ../${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       working-directory: project 
 
     - name: Deploy to Azure
