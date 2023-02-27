@@ -4,7 +4,7 @@ on: [push]
 
 env:
   AZURE_WEBAPP_NAME: UniversityInformationSystemApp
-  AZURE_WEBAPP_PACKAGE_PATH: './published'
+  AZURE_WEBAPP_PACKAGE_PATH: 'published'
   DOTNET_VERSION: '6.0.x'
 
 jobs:
@@ -32,12 +32,11 @@ jobs:
       working-directory: project
 
     - name: Publish app for deploy
-      run: dotnet publish --no-build -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      run: dotnet publish --no-build -c Release -o ../${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       working-directory: project 
 
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
-      working-directory: project 
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
