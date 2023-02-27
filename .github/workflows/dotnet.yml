@@ -1,4 +1,4 @@
-name: .NET
+name: Build UIS and Deploy to Azure
 
 on:
   push:
@@ -6,26 +6,43 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AZURE_WEBAPP_NAME: UniversityInformationSystemApp
+  AZURE_WEBAPP_PACKAGE_PATH: './published'
+  DOTNET_VERSION: '6.0.309'
+
 jobs:
   build:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     
-    - name: Setup .NET
+    - name: Setup .NET SDK ${{ env.DOTNET_VERSION }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
         
     - name: Restore dependencies
       run: dotnet restore
       working-directory: project
       
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -c Release
       working-directory: project
       
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build
       working-directory: project
+
+    - name: Publish app for deploy
+      run: dotnet publish --no-build -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      working-directory: project 
+
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
