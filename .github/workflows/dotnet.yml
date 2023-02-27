@@ -1,10 +1,6 @@
 name: Build UIS and Deploy to Azure
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 env:
   AZURE_WEBAPP_NAME: UniversityInformationSystemApp
