@@ -4,7 +4,7 @@ on: [push]
 
 env:
   AZURE_WEBAPP_NAME: UniversityInformationSystemApp
-  AZURE_WEBAPP_PACKAGE_PATH: './project/published'
+  AZURE_WEBAPP_PACKAGE_PATH: './published'
   DOTNET_VERSION: '6.0.x'
 
 jobs:
@@ -37,6 +37,7 @@ jobs:
 
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
+      working-directory: project 
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
