@@ -6,7 +6,7 @@ env:
   AZURE_WEBAPP_NAME: UniversityInformationSystemApp
   AZURE_WEBAPP_PACKAGE_PATH: publish
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 6.0.x
+  DOTNET_VERSION: 6.0.x
   WORKING_DIRECTORY: project
 
 jobs:
