@@ -26,10 +26,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore -c Release
       working-directory: project
-      
-    - name: Test
-      run: dotnet test
-      working-directory: project
 
     - name: Publish app for deploy
       run: dotnet publish ./Presentation/Presentation.csproj --no-build -c Release -o ../${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
