@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NLog.Common;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging.AzureAppServices;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation
 {
@@ -11,6 +14,15 @@ namespace Presentation
     {
         public static void Main(string[] args)
         {
+            var builder = WebApplication.CreateBuilder();
+            builder.Logging.AddAzureWebAppDiagnostics();
+            builder.Services.Configure<AzureFileLoggerOptions>(options =>
+            {
+                options.FileName = "azure-diagnostics-";
+                options.FileSizeLimit = 50 * 1024;
+                options.RetainedFileCountLimit = 5;
+            });
+
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             try
             {
