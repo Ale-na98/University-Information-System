@@ -14,15 +14,6 @@ namespace Presentation
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder();
-            builder.Logging.AddAzureWebAppDiagnostics();
-            builder.Services.Configure<AzureFileLoggerOptions>(options =>
-            {
-                options.FileName = "azure-diagnostics-";
-                options.FileSizeLimit = 50 * 1024;
-                options.RetainedFileCountLimit = 5;
-            });
-
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             try
             {
