@@ -32,7 +32,7 @@ jobs:
         run: dotnet test "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-build
 
       - name: Publish app for deploy
-        run: dotnet publish ${{ env.WORKING_DIRECTORY }}/Presentation/Presentation.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        run: dotnet publish ${{ env.WORKING_DIRECTORY }}/Presentation/Presentation.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.WORKING_DIRECTORY }}/${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy:
     name: Deploy
