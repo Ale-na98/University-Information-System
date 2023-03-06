@@ -27,6 +27,9 @@ jobs:
     - name: Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-restore
 
+    - name: Test
+      run: dotnet test "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-build
+
     - name: Publish app for deploy
       run: dotnet publish ${{ env.WORKING_DIRECTORY }}/Presentation/Presentation.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
     
