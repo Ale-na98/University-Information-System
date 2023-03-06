@@ -11,37 +11,37 @@ env:
 
 jobs:
   build:
-    name: Build and Deploy
+    name: Build
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup .NET SDK ${{ env.DOTNET_VERSION }}
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Setup .NET SDK ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
         
-    - name: Restore dependencies
-      run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
+      - name: Restore dependencies
+        run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
       
-    - name: Build
-      run: dotnet build "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-restore
+      - name: Build
+        run: dotnet build "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-restore
 
-    - name: Test
-      run: dotnet test "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-build
+      - name: Test
+        run: dotnet test "${{ env.WORKING_DIRECTORY }}" -c ${{ env.CONFIGURATION }} --no-build
 
-    - name: Publish app for deploy
-      run: dotnet publish ${{ env.WORKING_DIRECTORY }}/Presentation/Presentation.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: ${{ env.AZURE_WEBAPP_NAME }}
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Publish app for deploy
+        run: dotnet publish ${{ env.WORKING_DIRECTORY }}/Presentation/Presentation.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-    - name: Deploy to Azure WebApp
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+  deploy:
+    name: Deploy
+    runs-on: windows-latest
+    steps:
+      - name: Deploy to Azure WebApp
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+      - uses: actions/checkout@v2
