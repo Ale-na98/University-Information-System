@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Presentation.DataTransferObjects.Students;
-using System.Configuration;
 
 namespace Presentation
 {

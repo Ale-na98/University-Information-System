@@ -3,10 +3,6 @@ using NLog.Web;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using NLog.Common;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Logging.AzureAppServices;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation
 {
@@ -17,7 +13,6 @@ namespace Presentation
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             try
             {
-                InternalLogger.LogLevel = NLog.LogLevel.Trace;
                 logger.Debug("Application Started....");
                 CreateHostBuilder(args).Build().Run();
             }
