@@ -56,7 +56,7 @@ namespace Presentation
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-            //logger.LogInformation(Configuration.GetConnectionString("UniversityDb").Substring(0, 20));
+            logger.LogInformation(Configuration.GetConnectionString("UniversityDb").Substring(0, 20));
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
