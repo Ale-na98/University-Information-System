@@ -50,6 +50,7 @@ html {
 }
 
 body {
+  /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
 .footer {
@@ -62,6 +63,7 @@ body {
 
 /* Custom styles
 -------------------------------------------------- */
+
 .col-3-5 {
     flex: 0 0 auto;
     width: 20%;
