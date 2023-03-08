@@ -5,16 +5,16 @@ namespace DataAccess
 {
     public class AppContext : DbContext
     {
-        private static volatile bool _initialized;
+        //private static volatile bool _initialized;
 
         public AppContext(DbContextOptions<AppContext> options) : base(options)
         {
-            if (!Database.IsRelational() || !_initialized)
-            {
-                Database.EnsureDeleted();
-                Database.EnsureCreated();
-                _initialized = true;
-            }
+            //if (!Database.IsRelational() || !_initialized)
+            //{
+            //    Database.EnsureDeleted();
+            //    Database.EnsureCreated();
+            //    _initialized = true;
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace DataAccess
             CreateAttendance(modelBuilder);
             CreateSchedule(modelBuilder);
 
-            DbInitializer.FillDb(modelBuilder);
+            //DbInitializer.FillDb(modelBuilder);
         }
 
         private void CreateStudents(ModelBuilder modelBuilder)
