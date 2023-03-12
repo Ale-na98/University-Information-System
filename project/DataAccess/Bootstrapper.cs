@@ -14,7 +14,7 @@ namespace DataAccess
         public static IServiceCollection AddDataAccess(this IServiceCollection services, IConfiguration configuration)
         {
             return services
-                .AddDbContext<AppContext>(options => options.UseNpgsql(configuration.GetConnectionString("UniversityDb")))
+                .AddDbContext<AppDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("UniversityDb")))
                 .AddScoped<IUniversityRepository<TeacherDb>, UniversityRepository<TeacherDb>>()
                 .AddScoped<IUniversityRepository<GroupDb>, UniversityRepository<GroupDb>>()
                 .AddScoped<IAttendanceRepository, AttendanceRepository>()

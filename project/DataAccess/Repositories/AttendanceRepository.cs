@@ -10,9 +10,9 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<AttendanceDb> _attendanceDbSet;
 
-        public AttendanceRepository(AppContext universityDbContext) : base(universityDbContext)
+        public AttendanceRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            _attendanceDbSet = universityDbContext.Set<AttendanceDb>();
+            _attendanceDbSet = appDbContext.Set<AttendanceDb>();
         }
 
         public AttendanceDb GetWithLecture(int id)
