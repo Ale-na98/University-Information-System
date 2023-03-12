@@ -36,7 +36,7 @@ namespace Presentation
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
-                    logging.SetMinimumLevel(LogLevel.Trace);
+                    logging.SetMinimumLevel(LogLevel.Debug);
                 })
                 .UseNLog();
     }

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using System.Linq;
-using DataAccess.Entities;
 using BusinessLogic.Domain;
 using DataAccess.Interfaces;
-using BusinessLogic.Exceptions;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
