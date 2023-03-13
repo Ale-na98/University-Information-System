@@ -11,10 +11,10 @@ namespace DataAccess.Repositories
         private readonly DbSet<LectureDb> _lectureDbSet;
         private readonly DbSet<ScheduleDb> _scheduleDbSet;
 
-        public LectureRepository(AppContext universityDbContext) : base(universityDbContext)
+        public LectureRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            _lectureDbSet = universityDbContext.Set<LectureDb>();
-            _scheduleDbSet = universityDbContext.Set<ScheduleDb>();
+            _lectureDbSet = appDbContext.Set<LectureDb>();
+            _scheduleDbSet = appDbContext.Set<ScheduleDb>();
         }
 
         public IList<LectureDb> GetAllByGroupId(int? groupId)

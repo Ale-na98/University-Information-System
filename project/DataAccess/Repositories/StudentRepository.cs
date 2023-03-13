@@ -11,9 +11,9 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<StudentDb> _studentDbSet;
 
-        public StudentRepository(AppContext universityDbContext) : base(universityDbContext)
+        public StudentRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            _studentDbSet = universityDbContext.Set<StudentDb>();
+            _studentDbSet = appDbContext.Set<StudentDb>();
         }
 
         public StudentDb GetWithGroup(int id)

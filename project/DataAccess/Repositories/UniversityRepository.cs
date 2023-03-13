@@ -8,12 +8,12 @@ namespace DataAccess.Repositories
     public class UniversityRepository<TEntity> : IUniversityRepository<TEntity> where TEntity : class
     {
         private readonly DbSet<TEntity> _dbSet;
-        private readonly AppContext _context;
+        private readonly AppDbContext _context;
 
-        public UniversityRepository(AppContext universityDbContext)
+        public UniversityRepository(AppDbContext appDbContext)
         {
-            _context = universityDbContext;
-            _dbSet = universityDbContext.Set<TEntity>();
+            _context = appDbContext;
+            _dbSet = appDbContext.Set<TEntity>();
         }
 
         public TEntity Create(TEntity entity)

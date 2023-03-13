@@ -3,19 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
-    public class AppContext : DbContext
+    public class AppDbContext : DbContext
     {
-        private static volatile bool _initialized;
-
-        public AppContext(DbContextOptions<AppContext> options) : base(options)
-        {
-            if (!Database.IsRelational() || !_initialized)
-            {
-                Database.EnsureDeleted();
-                Database.EnsureCreated();
-                _initialized = true;
-            }
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,8 +16,6 @@ namespace DataAccess
             CreateGroups(modelBuilder);
             CreateAttendance(modelBuilder);
             CreateSchedule(modelBuilder);
-
-            DbInitializer.FillDb(modelBuilder);
         }
 
         private void CreateStudents(ModelBuilder modelBuilder)

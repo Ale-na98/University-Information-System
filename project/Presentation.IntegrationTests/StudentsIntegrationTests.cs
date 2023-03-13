@@ -7,6 +7,7 @@ using System.Net.Http.Json;
 using BusinessLogic.Domain;
 using System.Threading.Tasks;
 using Presentation.DataTransferObjects.Students;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace Presentation.IntegrationTests
 {
@@ -15,13 +16,11 @@ namespace Presentation.IntegrationTests
     {
         private HttpClient _client;
         private readonly string _studentUrl = "api/students";
-        private ModuleTenWebApplicationFactory _webApplicationFactory;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
-            _webApplicationFactory = new ModuleTenWebApplicationFactory();
-            _client = _webApplicationFactory.CreateClient();
+            _client = new IntegrationTestsWebApplicationFactory().CreateClient();
         }
 
         [Test]
@@ -49,21 +48,21 @@ namespace Presentation.IntegrationTests
             var result = await _client.PostAsJsonAsync(_studentUrl, request);
 
             // Assert
-            result.EnsureSuccessStatusCode(); 
+            result.EnsureSuccessStatusCode();
             Assert.IsTrue(result.StatusCode == HttpStatusCode.Created);
             Assert.AreEqual(expected, result.Content.ReadAsStringAsync().Result);
             Assert.AreEqual("api/students/13", result.Headers.Location.ToString());
         }
 
-        [TestCase("", "sergeymorozov@gmail.com", "89129478969", 1)]
-        [TestCase("Sergey Morozov", "", "89129478969", 1)]
-        [TestCase("Sergey Morozov", "sergeymorozov", "89129478969", 1)]
-        [TestCase("Sergey Morozov", "romankozlov@gmail.com", "89129478969", 1)]
-        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "", 1)]
-        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "89169475896", 1)]
-        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "89169475896", 0)]
-        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "89169475896", 4)]
-        public async Task Create_ShouldReturnBadRequestStatusCodeWhenBodyInvalid(string fullName, 
+        [TestCase("", "sergeymorozov@gmail.com", "89129478969", 1, TestName = "Case: Empty name")]
+        [TestCase("Sergey Morozov", "", "89129478969", 1, TestName = "Case: Empty email")]
+        [TestCase("Sergey Morozov", "sergeymorozov", "89129478969", 1, TestName = "Case: Incorrect format")]
+        [TestCase("Sergey Morozov", "romankozlov@gmail.com", "89129478969", 1, TestName = "Case: Non-unique email")]
+        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "", 1, TestName = "Case: Empty phone number")]
+        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "89169475896", 1, TestName = "Case: Non-unique phone number")]
+        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "89169475896", 0, TestName = "Case: Empty group Id")]
+        [TestCase("Sergey Morozov", "sergeymorozov@gmail.com", "89169475896", 4, TestName = "Case: Non-existing group Id")]
+        public async Task Create_ShouldReturnBadRequestStatusCodeWhenBodyInvalid(string fullName,
             string email, string phoneNumber, int groupId)
         {
             // Arrange
@@ -110,7 +109,7 @@ namespace Presentation.IntegrationTests
             var result = await _client.GetAsync(_studentUrl + "/0");
             Assert.IsTrue(result.StatusCode == HttpStatusCode.NoContent);
         }
-                
+
         [Test]
         public async Task Update_ExistentStudentId_ShouldReturnValueAndSuccessStatusCode()
         {

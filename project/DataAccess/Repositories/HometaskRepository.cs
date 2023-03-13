@@ -9,9 +9,9 @@ namespace DataAccess.Repositories
     {
         private readonly DbSet<HometaskDb> _hometaskDbSet;
 
-        public HometaskRepository(AppContext universityDbContext) : base(universityDbContext)
+        public HometaskRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            _hometaskDbSet = universityDbContext.Set<HometaskDb>();
+            _hometaskDbSet = appDbContext.Set<HometaskDb>();
         }
 
         public double GetAverageMark(int lectureId, int studentId)
