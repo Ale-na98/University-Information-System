@@ -1,5 +1,5 @@
-# University Information System
-It is an information system designed for the internal purposes of universities (currently under development).
+# University Information System  (under development)
+It is an information system designed for the internal purposes of universities.
 
 ### Available functionality:
 #### 1. Admin zone
